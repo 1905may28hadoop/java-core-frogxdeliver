@@ -1,12 +1,15 @@
 package com.revature.eval.java.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class EvaluationService {
 
 	/**
-	 * 1. Convert a phrase to its acronym. Techies love their TLA (Three Letter
+	 * 1. Convert a phrase to its acronym. Teachers love their TLA (Three Letter
 	 * Acronyms)! Help generate some jargon by writing a program that converts a
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 * 
@@ -15,14 +18,42 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
+		char acronymL = ' ';
+		String acronym = "";
+		
+		
+		// loop through the string
+		//grab the first character of the string as well as eah after a space or hyphen and append it the total
+		
+		//total string used after converting the temp string to uppercase
+		String total = "";
+		String temp = "";
+		
+		//adds the first character in the String. Freebie
+		temp += phrase.charAt(0);
+        
+        for (int i = 1; i <= phrase.length() - 1; i++) {
+        	//during the loop, if there's a space or a hyphen, increment the current character into the acronym string
+            if (phrase.charAt(i - 1) == ' ' || phrase.charAt(i - 1) == '-') {
+                temp += phrase.charAt(i);
+            }
+        }
+        total = temp.toUpperCase(); 
+				
+		System.out.println(total);
 		return null;
 	}
 
 	/**
 	 * 2. Given a word, compute the scrabble score for that word.
 	 * 
-	 * --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
-	 * C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
+	 * --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; 
+	 *  D, G = 2;
+	 *  B, C, M, P = 3; 
+	 *  F, H, V, W, Y = 4; 
+	 *  K = 5;
+	 *  J, X = 8; 
+	 *  Q, Z = 10; Examples
 	 * "cabbage" should be scored as worth 14 points:
 	 * 
 	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
@@ -34,8 +65,86 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		// variables:
+		// total - hold the final score (int)
+		//
+		// method:
+		// loop through the string
+		// convert string to lower-case
+		// check each character for point
+		// increment total based on each character's point value
+		
+		
+		//method on how to get a number from a list of val:
+		// loop through the array of each val with a for loop, then if one of those values
+		// equals a member of the string, add points
+		// *this was changed to use for each loops, after several attempts at using standard for loops showed 0 results
+		int total = 0;		
+		
+		
+		char[] val1 = {'a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't'}; //1 point
+		char[] val2 = {'d', 'g'}; //2 points
+		char[] val3 = {'b', 'c', 'm', 'p'}; //3 points
+		char[] val4 = {'f', 'h', 'v', 'w', 'y'}; //4 points
+		char[] val5 = {'k'}; //5 points
+		char[] val6 = {'j', 'x'};//8 points
+		char[] val7 = {'q', 'z'};//10 points
+		
+		
+		//version 2:
+		//creates a string that will convert the current string to lower-case
+		String toLowerCase = string.toLowerCase();
+		//creates a char that converts the string to a char
+		char[] charS = toLowerCase.toCharArray();
+		System.out.println(charS);
+		
+		//main for each loop that will loop through the current string
+		// each nested for loop checks for if the value is within a char[]
+		// If it is, it adds the appropriate score for that value
+		for (Character c: charS) {
+			for (Character v: val1) {
+				if (c.equals(v)) {
+					total+= 1;
+				}
+			}
+			for (Character v: val2) {
+				if (c.equals(v)) {
+					total+= 2;
+				}
+			}
+			for (Character v: val3) {
+				if (c.equals(v)) {
+					total+= 3;
+				}
+			}
+			for (Character v: val4) {
+				if (c.equals(v)) {
+					total+= 4;
+				}
+			}
+			for (Character v: val5) {
+				if (c.equals(v)) {
+					total+= 5;
+				}
+			}
+			for (Character v: val6) {
+				if (c.equals(v)) {
+					total+= 8;
+				}
+			}
+			for (Character v: val7) {
+				if (c.equals(v)) {
+					total+= 10;
+				}
+			}
+		}
+			
+		System.out.println("total = " + total);
+		return total;
+	}	 
+	public String loopVal(String str) {
+		
+		return str;
 	}
 
 	/**
@@ -71,7 +180,23 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] a = string.toCharArray();
+		String result = "";
+		
+		//loops through the string with a for each loop (using the c for comparing in the if block)
+		for (Character c : a) {
+			//check to see if the value is a number, if so then enter it into the result
+			if (c == '0' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') {
+				result += c;
+			}
+			//if not, then continue the loop. This removes any special characters or letters
+			else {
+				continue;
+			}
+		}
+		
+		System.out.println(result);
+		return result;
 	}
 
 	/**
@@ -83,9 +208,57 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
+	//UNFINISHED
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String, Integer> result = new HashMap<>();
+		
+		String[] splitS = string.split(" ");
+//		System.out.println(Arrays.deepToString(splitS));
+		
+		
+		
+		
+		
+		
+		
+		//append the repeating string and occurrences to the HashMap result
+		//to do this, loop through the string, and if there's a word, add it to the hashMap
+		System.out.println(string);
+		
+		//variable for holding
+		String temp = " ";
+//		System.out.println(string.indexOf("of"));
+		//for loop that checks if the current value is 
+		
+		//could be useful
+//		if (string.indexOf(temp) == -1) {
+////			continue;
+//		}else if(){
+//			
+//		}
+		//number for tracking how many strings there are
+//		int numStrings = 0;
+//		char[] sChar = string.toCharArray();
+//		temp += string.charAt(1);
+//		for (Character j : sChar) {
+//			if (j == ' ') {
+////				System.out.println("numbersLUL");
+//				temp += string.charAt(j);
+//			}
+//		}
+//		System.out.println(temp);
+		
+		
+		for (int i = 0; i < string.length(); i++) {
+			//check if the string has already been collected, if not then add it to the list
+			//if it has, then add the number of occurrences for that string
+			
+		}
+		
+		return result;
+//		return null;
 	}
 
 	/**
@@ -181,7 +354,6 @@ public class EvaluationService {
 		return null;
 	}
 
-
 	/**
 	 * 8-9. Create an implementation of the atbash cipher, an ancient encryption
 	 * system created in the Middle East.
@@ -215,8 +387,39 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			char[] word = string.toCharArray();
+			System.out.println(word);
+			char[] list = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+					's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+			
+			List<String> listV2 = new ArrayList<String>();
+			
+			String finalWord = "";
+			
+			//temp variable to hold the current index
+			int index = 0;
+			
+			//find the number within the list, then find the reverse of it
+			//
+			
+			
+			
+			
+//			for (Character d : list) {
+//				for (Character s : word) {
+//					if (d.equals(s)) {
+//						finalWord+= s;
+//						
+//					}
+//				}
+//			}
+			
+			
+			
+			
+			System.out.println(finalWord);
+			return string;
+//			return null;
 		}
 
 		/**
